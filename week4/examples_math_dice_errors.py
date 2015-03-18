@@ -1,5 +1,3 @@
-__author__ = 'willowcheng'
-
 """
 Math dice game.
 
@@ -67,9 +65,9 @@ def gen_all_sequences(outcomes, length):
     """
     Iterative function that enumerates the set of all sequences of
     outcomes of given length
-    """
+    """    
     ans = set([()])
-    for dummy_idx in range(length + 1):
+    for dummy_idx in range(length):
         temp = set()
         for seq in ans:
             for item in outcomes:
@@ -86,7 +84,7 @@ def roll(ndice, nsides):
     """
     Roll ndice with nsides.  Return a list of values.
     """
-    return [random.randrange(1, nsides + 1)
+    return [random.randrange(1, nsides + 1) 
             for dummy in range(ndice)]
 
 def product(dice):
@@ -117,7 +115,7 @@ def make_equations(ops, dice):
             eqn.append(dice_order[-1])
             val = evaluate(ops, eqn)
             eqn.append('=')
-            eqn.append(val)
+            eqn.append(val)     
             results.append(eqn)
     return results
 
@@ -146,7 +144,8 @@ def find_closest(target, eqns):
     """
     closest = [float('inf')]
     for eqn in eqns:
-        if abs(target - eqn[-1]) < abs(closest[-1]):
+        if abs(target - eqn[-1]) < abs(target - closest[-1]):
+            print(eqn)
             closest = eqn
     return closest
 
@@ -174,8 +173,10 @@ def play():
            '**': power}
 
     targetdice = roll(2, 12)
+    targetdice = [6, 7]
     targetval = product(targetdice)
     dice = roll(3, 6)
+    dice = [5, 5, 6]
 
     print "Target:", targetval, targetdice
     print "Dice:", dice
